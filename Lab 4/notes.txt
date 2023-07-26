@@ -1,0 +1,14 @@
+For the first task, I used two cursors. The first cursor outputs the sum of all the transaction amounts from the transaction table and the second cursor outputs the principle amount for the given account number from the database. I then added the sum of all the transactions to the principle amount to find the current balance. This is assuming that all the transactions are of deposit type.
+
+I did not face any mentionable difficulties while implementing this task.
+
+
+For the second task, I created two cursors. One cursor returns all the necessary information of the account type for calculation such as profit rate, grace period and principle amount. The second cursor returns the total number of months between the last interest date and today. Here the value is rounded to the floor value and it is calculated using the months\verb|_|between function. Since that function uses date input, I casted the timestamp values as date for this. After creating the cursors, I ran a loop for the number of months found by the second cursor. Inside the loop, I use calculated the profit by multiplying the profit rate with the principle amount. I also kept track of the total profit and the current accumulated profit since the profit is reset everytime grace period is reached. The principle amount is also updated by adding the current accumulated profit to it during the grace period. The balance after profit is just the principle amount and the total profit added together. All these are outputted in the form of a single string by the function.
+
+I faced difficulties in finding the solution to calculate the profit and reset the profit during the grace period. I also faced difficulties using the timestamp data type as it was new for me.
+
+
+
+For the third task, I created the same function as in task 2 but changed the return value to the calculated total profit only. Then I created a procedure. Inside the procedure, I used one cursor which returns all the possible account IDs. Then I used a loop to traverse through the results of the cursor and for each result, I used the function created beforehand to output the profit. I then updated the balance table with the calculated profit from the function.
+
+I did not face any mentionable difficulties when implementing this task.

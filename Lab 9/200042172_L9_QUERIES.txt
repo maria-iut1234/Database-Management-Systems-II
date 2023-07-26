@@ -1,0 +1,52 @@
+------------(a)------------
+MATCH (c:Customer)-[p:PURCHASED]->(b:Book)
+RETURN b.title AS Book, SUM(p.amount) AS Revenue
+ORDER BY Revenue DESC
+
+------------(b)------------
+//WITH allows us to pass results from one query to the next
+
+MATCH (g:Genre)<-[:IN_GENRE]-(b:Book)<-[p:BOOK_RATING]-(c:Customer)
+WITH g, AVG(p.book_rating) AS avg_rating
+RETURN g.name AS genre, avg_rating
+
+------------(c)------------
+MATCH (c:Customer {name: 'Shanta Maria'})-[r:PURCHASED]->(b:Book)
+WHERE r.purchasing_date >= date('2023-01-01') AND r.purchasing_date <= date('2023-12-31')
+RETURN c.name AS Customer, b.title AS Book
+
+------------(d)------------
+MATCH (c:Customer)-[p:PURCHASED]->(b:Book)
+WITH c, COUNT(p) AS Purchases
+RETURN c.name AS Customer, Purchases
+ORDER BY Purchases DESC LIMIT 1
+
+------------(e)------------
+MATCH (c:Customer)-[p:PURCHASED]->(b:Book)
+RETURN b.title AS Book, COUNT(p) AS Purchases
+ORDER BY Purchases DESC LIMIT 1
+
+------------(f)------------
+//Here frequency eliminates duplicates since a single customer could have rated and purchased the same book 
+
+MATCH (c:Customer)-[:PURCHASED|:BOOK_RATING]->(b:Book {title: 'The Murder of Roger Ackroyd'})
+RETURN c.name AS Customer, b.title AS Book, COUNT(*) AS Frequency
+ORDER BY Frequency DESC
+
+------------(g)------------
+MATCH (a:Author {name: 'Agatha Christie'})-[:WROTE]->(b:Book)<-[:PURCHASED]-(c:Customer)
+RETURN c.name AS Customer, COUNT(b) AS Num_books_bought
+ORDER BY Num_books_bought DESC
+LIMIT 1
+
+------------(h)------------
+MATCH (b1:Book)<-[p1:PURCHASED]-(c:Customer)-[p2:PURCHASED]->(b2:Book)
+WHERE b1 <> b2
+RETURN b1.title, b2.title, COUNT(DISTINCT c) AS frequency
+ORDER BY frequency DESC
+
+
+//Matches all pairs of Book nodes that are purchased by the same Customer node using the PURCHASED relationship 
+//and then counts the number of distinct Customer nodes that have purchased each pair of books
+//exclude pairs of books where both nodes represent the same book using the <> operator
+//sort the results in descending order based on the frequency of purchase.

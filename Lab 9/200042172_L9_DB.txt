@@ -1,0 +1,134 @@
+//All Nodes
+
+---------------------------Customer nodes---------------------------
+CREATE (a:Customer {customer_id: '172', name: 'Shanta Maria', phone_no: '1234567890', age: 24, gender: 'Female', country: 'UK'}),
+        (b:Customer {customer_id: '133', name: 'Nafisa Maliyat', phone_no: '0987654321', age: 28, gender: 'Female', country: 'Canada'}),
+        (c:Customer {customer_id: '113', name: 'Lomatul Mahzabin', phone_no: '5551234567', age: 35, gender: 'Female', country: 'Australia'}),
+        (d:Customer {customer_id: '106', name: 'Ayesha Afroza', phone_no: '274017292370', age: 30, gender: 'Male', country: 'USA'})
+RETURN a, b, c, d
+
+---------------------------Genre nodes---------------------------
+CREATE (a:Genre {name: 'Mystery'}),
+        (b:Genre {name: 'Romance'}),
+        (c:Genre {name: 'Science Fiction'}),
+        (d: Genre {name: 'Fantasy Fiction'}),
+        (e: Genre {name: 'Children\'s Literature'}),
+        (f: Genre {name: 'Drama'})
+RETURN a, b, c, d, e, f
+
+---------------------------Author nodes---------------------------
+CREATE (a:Author {name: 'Agatha Christie', country: 'UK', date_of_birth: date('1890-09-15')}),
+        (b:Author {name: 'J.K. Rowling', country: 'UK', date_of_birth: date('1965-07-31')}),
+        (c:Author {name: 'Isaac Asimov', country: 'Russia', date_of_birth: date('1920-01-02')})
+RETURN a, b, c
+
+---------------------------Book nodes---------------------------
+CREATE (a:Book {title: 'The Murder of Roger Ackroyd', published_year: 1926, language: 'English', page_count: 296, price: 10.99}),
+        (b:Book {title: 'Harry Potter and the Philosopher\'s Stone', published_year: 1997, language: 'English', page_count: 223, price: 12.99}),
+        (c:Book {title: 'Foundation', published_year: 1951, language: 'English', page_count: 255, price: 9.99}),
+        (d:Book {title: 'Murder on the Orient Express', published_year: 1934, language: 'English', page_count: 347, price: 11.99})
+RETURN a, b, c, d
+
+
+//All Relationships
+
+--------------Relationship between customer and book nodes (purchasing)--------------
+MATCH (a:Customer {customer_id: '172'}), (b:Book {title: 'The Murder of Roger Ackroyd'})
+CREATE (a)-[r:PURCHASED {purchasing_date: date('2022-10-15'), amount: 12.15}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '106'}), (b:Book {title: 'The Murder of Roger Ackroyd'})
+CREATE (a)-[r:PURCHASED {purchasing_date: date('2022-08-21'), amount: 12.15}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '133'}), (b:Book {title: 'Harry Potter and the Philosopher\'s Stone'})
+CREATE (a)-[r:PURCHASED {purchasing_date: date('2023-01-01'), amount: 14.00}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '113'}), (b:Book {title: 'Foundation'})
+CREATE (a)-[:PURCHASED {purchasing_date: date('2022-09-30'), amount: 10.23}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '172'}), (b:Book {title: 'Murder on the Orient Express'})
+CREATE (a)-[:PURCHASED {purchasing_date: date('2022-11-25'), amount: 12.55}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '172'}), (b:Book {title: 'Harry Potter and the Philosopher\'s Stone'})
+CREATE (a)-[:PURCHASED {purchasing_date: date('2023-03-24'), amount: 14.00}]->(b)
+RETURN a, b
+
+--------------Relationship between customer and book nodes (rating)--------------
+MATCH (a:Customer {customer_id: '172'}), (b:Book {title: 'The Murder of Roger Ackroyd'})
+CREATE (a)-[r:BOOK_RATING {book_rating: 7.3}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '106'}), (b:Book {title: 'The Murder of Roger Ackroyd'})
+CREATE (a)-[r:BOOK_RATING {book_rating: 8.0}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '133'}), (b:Book {title: 'Harry Potter and the Philosopher\'s Stone'})
+CREATE (a)-[r:BOOK_RATING {book_rating: 9.4}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '113'}), (b:Book {title: 'Foundation'})
+CREATE (a)-[:BOOK_RATING {book_rating: 7.4}]->(b)
+RETURN a, b
+
+MATCH (a:Customer {customer_id: '172'}), (b:Book {title: 'Murder on the Orient Express'})
+CREATE (a)-[:BOOK_RATING {book_rating: 9.2}]->(b)
+RETURN a, b
+
+
+--------------Relationship between customer and author nodes--------------
+MATCH (c:Customer {customer_id: '106'}), (a:Author {name: 'Agatha Christie'})
+CREATE (c)-[:AUTHOR_RATING {author_rating: 4}]->(a)
+RETURN c, a
+
+MATCH (c:Customer {customer_id: '172'}), (a:Author {name: 'J.K. Rowling'})
+CREATE (c)-[:AUTHOR_RATING {author_rating: 7.5}]->(a)
+RETURN c, a
+
+--------------Relationship between book and genre nodes--------------
+MATCH (b:Book {title: 'Harry Potter and the Philosopher\'s Stone'})
+MATCH (g1:Genre {name: 'Fantasy Fiction'}), (g2:Genre {name: 'Children\'s Literature'})
+CREATE (b)-[:IN_GENRE]->(g1), (b)-[:IN_GENRE]->(g2)
+RETURN b, g1, g2
+
+MATCH (b:Book {title: 'Murder on the Orient Express'})
+MATCH (g1:Genre {name: 'Mystery'})
+CREATE (b)-[:IN_GENRE]->(g1)
+RETURN b, g1
+
+MATCH (b:Book {title: 'The Murder of Roger Ackroyd'})
+MATCH (g1:Genre {name: 'Mystery'})
+CREATE (b)-[:IN_GENRE]->(g1)
+RETURN b, g1
+
+MATCH (b:Book {title: 'Foundation'})
+MATCH (g1:Genre {name: 'Science Fiction'}), (g2:Genre {name: 'Drama'})
+CREATE (b)-[:IN_GENRE]->(g1), (b)-[:IN_GENRE]->(g2)
+RETURN b, g1, g2
+
+--------------Relationship between book and author nodes--------------
+MATCH (a:Author {name: 'Agatha Christie'})
+MATCH (b1:Book {title: 'The Murder of Roger Ackroyd'}), (b2:Book {title: 'Murder on the Orient Express'})
+CREATE (a)-[:WROTE {writing_year: 1926}]->(b1), (a)-[:WROTE {writing_year: 1934}]->(b2)
+RETURN a, b1, b2
+
+MATCH (a:Author {name: 'J.K. Rowling'})
+MATCH (b1:Book {title: 'Harry Potter and the Philosopher\'s Stone'})
+CREATE (a)-[:WROTE {writing_year: 1997}]->(b1)
+RETURN a, b1
+
+MATCH (a:Author {name: 'Isaac Asimov'})
+MATCH (b1:Book {title: 'Foundation'})
+CREATE (a)-[:WROTE {writing_year: 1951}]->(b1)
+RETURN a, b1
+
+--------------Relationship between book and author nodes--------------
+MATCH (b:Book {title: 'Foundation'})
+CREATE (v1:Volume {volume_number: 1})
+CREATE (v2:Volume {volume_number: 2})
+CREATE (b)-[:HAS_VOLUME]->(v1)
+CREATE (b)-[:HAS_VOLUME]->(v2)
+RETURN b, v1, v2

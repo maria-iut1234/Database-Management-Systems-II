@@ -1,0 +1,144 @@
+[{
+  "_id": {
+    "$oid": "6415d718e05a1c740cad9a25"
+  },
+  "name": "Corax Maria",
+  "email": "corax@gmail.com",
+  "password": "maria1234",
+  "followers": [],
+  "following": [
+    {
+      "$oid": "6415d718e05a1c740cad9a26"
+    },
+    {
+      "$oid": "6415d7b1e05a1c740cad9a27"
+    },
+    {
+      "$oid": "6415d7b1e05a1c740cad9a28"
+    },
+    {
+      "$oid": "6415d7e5e05a1c740cad9a29"
+    }
+  ]
+},{
+  "_id": {
+    "$oid": "6415d7b1e05a1c740cad9a26"
+  },
+  "name": "Tommy Shelby",
+  "email": "tommy@gmail.com",
+  "password": "tommy123",
+  "phoneNumber": "01819954271",
+  "dob": {
+    "$date": {
+      "$numberLong": "-3747081600000"
+    }
+  },
+  "address": "birmingham",
+  "profileCreationDate": {
+    "$date": "2023-03-18T15:24:33.457Z"
+  },
+  "hobbies": [
+    "horse-racing",
+    "gambling"
+  ],
+  "followers": [
+    {
+      "$oid": "6415d718e05a1c740cad9a25"
+    },
+    {
+      "$oid": "6415d7b1e05a1c740cad9a27"
+    },
+    {
+      "$oid": "6415d7b1e05a1c740cad9a28"
+    },
+    {
+      "$oid": "6415d7e5e05a1c740cad9a29"
+    }
+  ],
+  "following": []
+},{
+  "_id": {
+    "$oid": "6415d7b1e05a1c740cad9a27"
+  },
+  "name": "Michael Shelby",
+  "email": "michael@gmail.com",
+  "password": "michael123",
+  "phoneNumber": "018458923711",
+  "dob": {
+    "$date": {
+      "$numberLong": "-2117923200000"
+    }
+  },
+  "address": "london",
+  "profileCreationDate": {
+    "$date": "2023-03-18T15:24:33.457Z"
+  },
+  "hobbies": [
+    "accounting",
+    "playing tag"
+  ],
+  "followers": [
+    {
+      "$oid": "6415d718e05a1c740cad9a25"
+    },
+    {
+      "$oid": "6415d7e5e05a1c740cad9a29"
+    }
+  ],
+  "following": []
+},{
+  "_id": {
+    "$oid": "6415d7b1e05a1c740cad9a28"
+  },
+  "name": "Polly Shelby",
+  "email": "polly@gmail.com",
+  "password": "polly123",
+  "phoneNumber": "01629749016",
+  "dob": {
+    "$date": {
+      "$numberLong": "-4648492800000"
+    }
+  },
+  "address": "new york",
+  "profileCreationDate": {
+    "$date": "2023-03-18T15:24:33.457Z"
+  },
+  "hobbies": [
+    "intimidating people",
+    "keeping the shelbys in line"
+  ],
+  "followers": [
+    {
+      "$oid": "6415d718e05a1c740cad9a25"
+    },
+    {
+      "$oid": "6415d7e5e05a1c740cad9a29"
+    }
+  ],
+  "following": []
+},{
+  "_id": {
+    "$oid": "6415d7e5e05a1c740cad9a29"
+  },
+  "name": "May NonShelby",
+  "email": "may@gmail.com",
+  "password": "may123",
+  "phoneNumber": "01597772094",
+  "dob": {
+    "$date": {
+      "$numberLong": "-3121372800000"
+    }
+  },
+  "address": "buckingham",
+  "profileCreationDate": {
+    "$date": "2023-03-18T15:25:25.858Z"
+  },
+  "workingStatus": [
+    {
+      "status": "Working as a Race Horse Trainer",
+      "duration": 5
+    }
+  ],
+  "following": [],
+  "followers": []
+}]

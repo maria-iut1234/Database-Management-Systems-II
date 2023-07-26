@@ -1,0 +1,299 @@
+//Commands
+
+mongosh
+
+use social_media
+
+//Task 2(a)
+
+db.user.insertOne(
+    {
+        "name": "Corax Maria",
+        "email": "corax@gmail.com",
+        "password": "maria1234" 
+    }
+)
+
+//Task 2(b)
+
+db.user.insertMany(
+[
+    {
+        "name":"Tommy Shelby",
+        "email": "tommy@gmail.com",
+        "password": "tommy123",
+        "phoneNumber": "01819954271",
+        "dob": new Date("1851-04-06"),
+        "address": "birmingham",
+        "profileCreationDate": new Date(),
+        "hobbies": [
+            "horse-racing",
+            "gambling"
+        ]
+    },
+    {
+        "name":"Michael Shelby",
+        "email": "michael@gmail.com",
+        "password": "michael123",
+        "phoneNumber": "018458923711",
+        "dob": new Date("1902-11-21"),
+        "address": "london",
+        "profileCreationDate": new Date(),
+        "hobbies": [
+            "accounting",
+            "playing tag"
+        ]
+    },
+    {
+        "name":"Polly Shelby",
+        "email": "polly@gmail.com",
+        "password": "polly123",
+        "phoneNumber": "01629749016",
+        "dob": new Date("1822-09-12"),
+        "address": "new york",
+        "profileCreationDate": new Date(),
+        "hobbies": [
+            "intimidating people",
+            "keeping the shelbys in line"
+        ]
+    }
+]
+)
+
+//Task 2(c)
+
+db.user.insertOne(
+    {
+        "name":"May NonShelby",
+        "email": "may@gmail.com",
+        "password": "may123",
+        "phoneNumber": "01597772094",
+        "dob": new Date("1871-02-02"),
+        "address": "buckingham",
+        "profileCreationDate": new Date(),
+        "workingStatus": [
+            {
+                "status":"Working as a Race Horse Trainer",
+                "duration":5
+            }
+        ]
+    }
+)
+
+//Task 2(d)
+
+db.user.updateMany(
+    {
+        "_id": {
+            $in : [
+                ObjectId('6415d7b1e05a1c740cad9a26'), 
+                ObjectId('6415d7b1e05a1c740cad9a27'),
+                ObjectId('6415d7b1e05a1c740cad9a28')
+            ]
+        } 
+    },
+    {
+        $set: {
+            "followers": [
+                ObjectId('6415d718e05a1c740cad9a25'),
+                ObjectId('6415d7e5e05a1c740cad9a29')
+            ]
+        } 
+    } 
+)
+
+//Task 2(e)
+
+db.post.insertMany(
+[
+    {
+        "content":"Falgun X Shapa Day",
+        "creationTime": new Date(),
+        "createdBy": ObjectId('640ff08526fe322665304ee7'),
+        "likes": [
+            ObjectId('6415d7b1e05a1c740cad9a26'),
+            ObjectId('6415d7b1e05a1c740cad9a27'),
+            ObjectId('6415d7e5e05a1c740cad9a29')
+        ]
+    },
+    {
+        "content":"Dealing with the Solomons and ending the Sabinis",
+        "creationTime": new Date(),
+        "createdBy":ObjectId('640ff08526fe322665304eea'),
+        "likes": [
+            ObjectId('6415d7b1e05a1c740cad9a27'),
+            ObjectId('6415d7b1e05a1c740cad9a28')
+        ]
+    },
+    {
+        "content":"Say Bye-Bye to Inspector Campbell, I work for Winston Churchill Now!",
+        "creationTime": new Date(),
+        "createdBy":ObjectId('6415d7b1e05a1c740cad9a26'),
+        "likes": [
+            ObjectId('6415d7b1e05a1c740cad9a27'),
+            ObjectId('6415d7b1e05a1c740cad9a28'),
+            ObjectId('6415d7e5e05a1c740cad9a29'),
+            ObjectId('6415d718e05a1c740cad9a25')
+        ]
+    },
+    {
+        "content":"Ahhhhhh PROPOSAL PRESENTATION TOMOROWWWWWWWW!!!!!!",
+        "creationTime": new Date(),
+        "createdBy":ObjectId('6415d718e05a1c740cad9a25'),
+        "likes": [
+            ObjectId('6415d7e5e05a1c740cad9a29')
+        ]
+    }
+]
+)
+
+//Task 2(f)
+
+db.post.updateMany(
+    {
+        "_id": {
+            $in : [
+                ObjectId('6415db43e05a1c740cad9a2a'), 
+                ObjectId('6415db43e05a1c740cad9a2b'),
+                ObjectId('6415db43e05a1c740cad9a2c'),
+                ObjectId('6415db43e05a1c740cad9a2d')
+            ]
+        } 
+    },
+    {
+        $set: {
+            "comments": [
+                {
+                    "commentContent":"Lessss Goooooo",
+                    "commentedBy": ObjectId('6415d7b1e05a1c740cad9a27')
+                },
+                {
+                    "commentContent":"I don't know what's happening here...",
+                    "commentedBy": ObjectId('6415d7e5e05a1c740cad9a29')
+                }
+            ]
+        } 
+    } 
+)
+
+//Task 3(a)
+
+db.post.insertMany(
+[
+    {
+        "content":"Married to Grace",
+        "creationTime": new Date("1871-02-02"),
+        "createdBy": ObjectId('6415d7b1e05a1c740cad9a26'),
+        "likes": [
+            ObjectId('6415d718e05a1c740cad9a25'),
+            ObjectId('6415d7b1e05a1c740cad9a27'),
+            ObjectId('6415d7e5e05a1c740cad9a29')
+        ]
+    },
+    {
+        "content":"Another great day killing cordyceps with Ellie. Not a scratch as always!",
+        "creationTime": new Date("1871-02-02"),
+        "createdBy":ObjectId('6415d718e05a1c740cad9a25'),
+        "likes": [
+            ObjectId('6415d7b1e05a1c740cad9a26'),
+            ObjectId('6415d7b1e05a1c740cad9a28')
+        ]
+    }
+]
+)
+
+db.post.find().sort({creationTime: 1});
+
+//Task 3(b)
+
+db.post.find({"creationTime": {$gte: new Date(Date.now() - 24*60*60*1000)}});
+//converted to milliseconds
+
+//Task 3(c)
+
+db.user.updateOne(
+    {
+        "_id": {
+            $in : [
+                ObjectId('6415d7b1e05a1c740cad9a26')
+            ]
+        } 
+    },
+    {
+        $set: {
+            "followers": [
+                ObjectId('6415d718e05a1c740cad9a25'),
+                ObjectId('6415d7b1e05a1c740cad9a27'),
+                ObjectId('6415d7b1e05a1c740cad9a28'),
+                ObjectId('6415d7e5e05a1c740cad9a29')
+            ],
+            "following": []
+        } 
+    } 
+)
+
+db.user.updateOne(
+    {
+        "_id": {
+            $in : [
+                ObjectId('6415d718e05a1c740cad9a25')
+            ]
+        } 
+    },
+    {
+        $set: {
+            "followers": [
+            ],
+            "following": [
+                ObjectId('6415d718e05a1c740cad9a26'),
+                ObjectId('6415d7b1e05a1c740cad9a27'),
+                ObjectId('6415d7b1e05a1c740cad9a28'),
+                ObjectId('6415d7e5e05a1c740cad9a29')
+            ]
+        } 
+    } 
+)
+
+db.user.updateMany(
+    {
+        "_id": {
+            $in : [
+                ObjectId('6415d7b1e05a1c740cad9a27'),
+                ObjectId('6415d7b1e05a1c740cad9a28'),
+                ObjectId('6415d7e5e05a1c740cad9a29')
+            ]
+        } 
+    },
+    {
+        $set: {
+            "following": [
+            ]
+        } 
+    } 
+)
+
+db.user.updateOne(
+    {
+        "_id": {
+            $in : [
+                ObjectId('6415d7e5e05a1c740cad9a29')
+            ]
+        } 
+    },
+    {
+        $set: {
+            "followers": [
+            ]
+        } 
+    } 
+)
+
+db.user.find({$expr: {$gt: [{$size: "$followers"}, 3]}});
+
+//$expr compares the given values
+//$size return the number of elements in the specified array
+//$gt means greater than
+
+//Task 3(d)
+
+db.user.find({$expr: {$gt: [{$size: "$following"}, 3]}});

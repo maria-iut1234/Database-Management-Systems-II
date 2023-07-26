@@ -1,0 +1,34 @@
+For this task, I made a procedure which took the movie title as the input. Inside the procedure, a cursor is declared which returns the movie time of the input movie title from the database. I then fetched the cursor result into a variable after opening it. To find the total cinema time, firstly I calculated the total number of intervals for the movie by dividing the time by 70 and getting the floor value of the result using the floor() function. Next, I added the extra 15 minutes of interval time to the movie time for all the possible intervals combined. Then I broke down the time into hours and minutes and printed the output time.
+
+It was difficult to understand whether to run a loop to calculate the number of hours for the movie time since floor() was an unfamiliar function. After understanding the use of floor() function in SQL, it was easier to break down the time. Other than that, I did not face any mentionable issues.
+
+
+
+
+
+
+For this task, I made a procedure which took a number n as input printed the top n movies according to their average rating. For this, a cursor was declared. The cursor consists of a nested sql statement where one statement returns all the movie titles with their average rating using the avg() function which was rounded to 2 decimal places using the round() function and the group by clause. The results were ordered in descending order according to the average rating so that when the outer statement of the nested SQL returned only the top n rows, it would be the top n rated movies. To show an error for exceeding the number of movies, I used raise_application_error() function and checked the validity using the total number of rows in the movie table. After checking the validity of the input number, the cursor is opened and the results are fetched into variables then printed.
+
+I faced difficulty in rounding the average rating to 2 decimal places but I was able to solve the problem by using the round() function. Other than that, I did not face any mentionable issues.
+
+
+
+For this task, I designed a function which took the movie title as input and returned a string (varchar2) result. Inside the procedure, I made a cursor which returns the release date and the rating of the input movie only if the rating is above 6. Then after opening the cursor and fetching the results into variables, I used a temporary variable to first calculate the total earning by multiplying 10 to (10-rating) since 10 dollars is multiplied to every rating after 6 not before. The cursor loops until all the rows are traversed so for each rating the earning is added to the previous calculated result. After the loop is completed, I divided the earning by the difference of years between the current year and the year in which the movie was released. The result is the yearly earning which was returned from the function.
+
+It was difficult to understand the calculation of the yearly earning. Other than that, I did not face any mentionable issues.
+
+
+
+
+
+For this task, I created a function which took the genre ID as input and returned a varchar2 result. I made two cursors inside this function. One cursor returns the details of the input genre. It counts the number of reviews using count() and calculates the average of all the ratings round to 2 decimal places using avg() and round() by grouping the results according to the given genre ID. The second cursor returns the average review count and the average rating of all the different genres. It uses the SQL query of the first cursor without specifying the genre ID and nests it within a from clause. Then it calculates the average review count and rating from the results of the nested query. Both the cursors are opened later and the results are fetched into variables. The results of the specified genre are checked against the results of all the different genres according to the conditions specified in the question and a variable g_status meaning the genre status is set according to the conditions. This condition checking is done using if statements. The wanted outputs are then converted to char and added to a single varchar2 variable which the functions returns.
+
+I faced a lot of difficulty when doing this task. At first, the function showed errors for char to number conversion since I used + instead of || when concatenating strings. Next, I did not know the char concatenate new line to a variable. After much research I was able to find the answer. It was also difficult to figure out how to calculate the average rating of different genres as well as the input genre withing a single cursor since I was unfamiliar with using multiple cursors.
+
+
+
+
+For this task, I created a function which takes two dates as input. The user input is taken as string but the to_date() function converts it to date type. A cursor is declared inside the function which returns the genre title with the number of movies of the genre between the input dates. The query checks if the release date is inbetween the two dates and groups the result by genre ID to count the number of movies for each genre using count() function. The results were also ordered according to the movie count in descending order. This is because when the cursor is opened, only the first result is fetched and stored into variables since we want only the genre with the highest movie count and this is possible because of how the query results were ordered earlier. The results are then concatenated as strings into a varchar2 variable which is returned by the function in the end.
+
+
+I faced diffculty in converting the user input date into date format but other than that, I did not face any mentionable issues.
